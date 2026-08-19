@@ -33,7 +33,7 @@ Ein modernes, benutzerfreundliches WordPress-Plugin zur schnellen Berechnung von
 
 Dieses Plugin ist komplett kostenlos und open-source. Ich stecke viel Freizeit in die Entwicklung und Pflege dieses Tools. Wenn Ihnen der Mehrwertsteuer-Rechner bei Ihrer Arbeit hilft oder Ihnen gefällt, freue ich mich riesig über eine kleine Unterstützung, um die Weiterentwicklung zu finanzieren:
 
-* ☕ **Kaffee ausgeben:** [Hier Ihr Link zu BuyMeACoffee oder Ko-fi einfügen]
-* 💸 **Direkt spenden:** [Hier Ihr PayPal.me Link einfügen]
+* 💸 **Direkt spenden:** [Per PayPal unterstützen](https://paypal.me/Mwst167)
 
-Vielen Dank für Ihren Support! Vielen Dank für deine Unterstützung! Sam ❤️
+Vielen Dank für Ihre Unterstützung! / Thank you for your support! Sam ❤️
+
