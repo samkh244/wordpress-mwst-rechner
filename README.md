@@ -15,7 +15,8 @@ Ein modernes, benutzerfreundliches WordPress-Plugin zur schnellen Berechnung von
 
 ## 📸 Vorschau / Preview
 
-*(Hier fügen wir gleich Ihr tolles Bild ein!)*
+<img width="548" height="701" alt="WordPress-Mehrwertsteuer Rechner  VAT Calculator" src="https://github.com/user-attachments/assets/85c37775-e180-44bb-a332-fb5c85a749f0" />
+
 
 ---
 
