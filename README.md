@@ -3,7 +3,7 @@
 Professioneller Mehrwertsteuer-Rechner für WordPress – berechnet Netto ↔ Brutto in Sekunden, mehrsprachig und datenschutzfreundlich.
 
 <p align="center">
-  <img src="preview.jpg" alt="Vorschau / Preview" width="340">
+  <img src=".github/preview.jpg" alt="Vorschau / Preview" width="340">
 </p>
 
 **Aktuelle Version:** 1.2.7 | **Getestet bis:** WordPress 7.1 | **Benötigt:** PHP 7.2+
@@ -77,7 +77,7 @@ Vollständiger Changelog in der [readme.txt](readme.txt).
 
 Dieses Plugin ist **kostenlos** und wird in der Freizeit entwickelt. Es gibt **keinen offiziellen Support** und keinen Anspruch auf Hilfe, Fehlerbehebungen oder neue Funktionen. Das Plugin wird so bereitgestellt, wie es ist („as is").
 
-Wenn dir das Plugin gefällt und du die Weiterentwicklung unterstützen möchtest, freue ich mich über eine freiwillige Spende: **[mointools.com/spenden](https://mointools.com/spenden)** 💙
+Wenn dir das Plugin gefällt und du die Weiterentwicklung unterstützen möchtest, freue ich mich über eine freiwillige Spende: **[github.com/sponsors/samkh244](https://github.com/sponsors/samkh244)** 💙
 
 Fehlerberichte und Verbesserungsvorschläge kannst du gerne als [Issue](../../issues) hinterlassen – ich schaue nach Möglichkeit vorbei, kann aber keine Antwort garantieren.
 
