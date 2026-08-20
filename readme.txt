@@ -1,6 +1,6 @@
 === Mehrwertsteuer Rechner ===
 Contributors: samadkhakpour
-Donate link: https://mointools.com/spenden
+Donate link: https://github.com/sponsors/samkh244
 Tags: mehrwertsteuer, vat, calculator, rechner, steuer, tax, mwst, umsatzsteuer, schweiz, österreich
 Requires at least: 5.0
 Tested up to: 7.1
@@ -54,7 +54,7 @@ Alle Berechnungen und der Verlauf werden nur im Browser des Nutzers gespeichert 
 
 = Kostenlos & Spendenbasis =
 
-Dieses Plugin ist kostenlos und wird ohne offiziellen Support bereitgestellt ("as is"). Es besteht kein Anspruch auf Hilfe, Fehlerbehebungen oder neue Funktionen. Wenn Ihnen das Plugin gefällt, freuen wir uns über eine freiwillige Spende: [mointools.com/spenden](https://mointools.com/spenden)
+Dieses Plugin ist kostenlos und wird ohne offiziellen Support bereitgestellt ("as is"). Es besteht kein Anspruch auf Hilfe, Fehlerbehebungen oder neue Funktionen. Wenn Ihnen das Plugin gefällt, freuen wir uns über eine freiwillige Spende: [GitHub Sponsors](https://github.com/sponsors/samkh244)
 
 == Installation ==
 
@@ -287,4 +287,4 @@ Dieses Plugin wird kostenlos und ohne offiziellen Support bereitgestellt.
 = Spenden =
 
 Wenn Ihnen das Plugin gefällt, freuen wir uns über eine Spende:
-https://mointools.com/spenden
+https://github.com/sponsors/samkh244
