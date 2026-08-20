@@ -1,0 +1,17 @@
+# Betriebssystem-Dateien
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor-Dateien
+.vscode/
+.idea/
+*.sublime-*
+
+# Release-ZIPs nicht ins Repository (gehören zu den Releases)
+*.zip
+
+# Logs und Temporäres
+*.log
+*.tmp
+*.bak
