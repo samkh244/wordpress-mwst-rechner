@@ -1,0 +1,622 @@
+/**
+ * Mehrwertsteuer Rechner - Stylesheet
+ * Version 1.2.7
+ *
+ * INHALT:
+ *   1. Design-Tokens (Variablen)
+ *   2. Basis-Styles (auf den Rechner begrenzt)
+ *   3. Haupt-Container
+ *   4. Sprachwahl (Flaggen-Buttons)
+ *   5. Eingabefelder & Floating Labels
+ *   6. Fehler-Markierung
+ *   7. Berechnen-Button
+ *   8. Ergebnis-Box
+ *   9. Verlauf
+ *  10. Verlauf: Footer-Buttons (Export)
+ *  11. Responsive: Smartphone (max 600px)
+ *  12. Responsive: Kleinste Bildschirme (max 480px)
+ *  13. Responsive: Tablet (601-900px)
+ */
+
+/* ==========================================================================
+   1. DESIGN-TOKENS (anpassbar)
+   ========================================================================== */
+:root {
+  /* Farben */
+  --accent: #0c71c3;              /* Hauptfarbe (blauer Container) */
+  --accent-dark: #06627f;
+  --accent-light: #b8e9f6;
+  --text-dark: #222;
+  --input-text: #00264c;          /* Dunkelblau fuer Eingabetext & Labels */
+  --danger: #dc3545;
+  --success: #28a84a;
+  --netto-color: #000;
+  --mwst-color: #d62828;
+  --brutto-color: #2ba84a;
+
+  /* Layout */
+  --radius: 16px;
+  --card-radius: 14px;
+  --btn-size: 56px;
+  --gap: 24px;
+  --shadow: 0 10px 30px rgba(6, 38, 60, 0.12);
+  --input-border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   2. BASIS-STYLES (auf den Rechner begrenzt)
+   Alle Styles wirken NUR innerhalb von #rechner_container und
+   veraendern das Theme der einbindenden Website nicht.
+   ========================================================================== */
+#rechner_container,
+#rechner_container *,
+#rechner_container *::before,
+#rechner_container *::after {
+  box-sizing: border-box;
+}
+
+#rechner_container {
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   3. HAUPT-CONTAINER
+   ========================================================================== */
+#rechner_container {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#mwst-rechner {
+  width: 100%;
+  max-width: 600px;
+  margin: 12px auto;
+  padding: 26px;
+  background: var(--accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: #fff;
+  text-align: left;
+}
+
+#mwst-rechner .content-inner {
+  display: block;
+  color: inherit;
+}
+
+/* ==========================================================================
+   4. SPRACHWAHL (Flaggen-Buttons)
+   ========================================================================== */
+.language-row {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.language-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 52px;
+  height: 42px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.10);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.lang-btn.active-lang,
+.lang-btn[aria-pressed="true"] {
+  background: rgba(255, 255, 255, 0.35) !important;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   5. EINGABEFELDER & FLOATING LABELS
+   ========================================================================== */
+.group {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8px;
+}
+
+.group.floating-label-group {
+  position: relative;
+  height: 60px;
+}
+
+.group input[type="number"],
+.group select {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 14px;
+  border: 2px solid var(--input-border-color);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--input-text);
+  font-size: 17.6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.group input:focus,
+.group select:focus {
+  border-color: var(--input-text);
+}
+
+.floating-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 0 5px;
+  background: #fff;
+  color: var(--input-text);
+  font-size: 17.6px;
+  line-height: 1;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+  z-index: 10;
+}
+
+.floating-label * { color: var(--input-text); }
+
+/* Label nach oben schieben bei Fokus oder Inhalt */
+.group input[type="number"]:focus + .floating-label,
+.group.has-content .floating-label {
+  top: -10px;
+  font-size: 13.6px;
+}
+
+/* ==========================================================================
+   6. FEHLER-MARKIERUNG (bei ungueltiger Eingabe, siehe script.js)
+   ========================================================================== */
+.group input.input-error {
+  border-color: var(--danger) !important;
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
+}
+
+/* ==========================================================================
+   7. BERECHNEN-BUTTON
+   ========================================================================== */
+button.primary {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin: 10px auto;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #bc0000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button.primary:hover {
+  background-color: #ff3333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+button.primary:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   8. ERGEBNIS-BOX
+   ========================================================================== */
+.ergebnis-box {
+  max-width: 520px;
+  margin: 20px auto;
+  padding: 22px;
+  background: #fff;
+  border-radius: var(--card-radius);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  color: var(--text-dark);
+}
+
+.ergebnis-box h3 {
+  margin: 0 0 12px;
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.ergebnis-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 16.8px;
+}
+
+.ergebnis-row:last-child { border-bottom: none; }
+
+.ergebnis-netto  { color: var(--netto-color);  font-weight: 600; }
+.ergebnis-mwst   { color: var(--mwst-color);   font-weight: 600; }
+.ergebnis-brutto { color: var(--brutto-color); font-weight: 700; }
+#mwstSatzText    { color: var(--mwst-color);   font-weight: bold; }
+
+/* ==========================================================================
+   9. VERLAUF
+   ========================================================================== */
+.verlauf-container {
+  max-width: 600px;
+  margin: 22px auto 0;
+}
+
+.verlauf-title {
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: 22.4px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#verlauf {
+  max-height: 320px;
+  overflow: auto;
+  padding: 6px;
+}
+
+/* "Noch keine Berechnungen"-Text */
+#verlauf p {
+  margin: 0;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Einzelner Verlauf-Eintrag */
+.verlauf-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(2, 24, 30, 0.06);
+}
+
+.verlauf-left {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.verlauf-time {
+  margin-bottom: 6px;
+  color: #666;
+  font-size: 14.4px;
+}
+
+.verlauf-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.verlauf-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.verlauf-row:last-child { border-bottom: none; }
+
+.verlauf-row .v-label {
+  flex-basis: 50%;
+  color: #555;
+  font-weight: normal;
+}
+
+.v-netto  { color: var(--netto-color);  font-weight: 600; }
+.v-mwst   { color: var(--mwst-color);   font-weight: 600; }
+.v-brutto { color: var(--brutto-color); font-weight: 700; }
+.mwst-prozent { color: red; font-weight: bold; }
+
+/* Notiz und Loeschen-Button nebeneinander */
+.verlauf-bottom-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.verlauf-note-input {
+  flex: 1;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.verlauf-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 8px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  background: transparent;
+  color: #555;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.verlauf-delete:hover {
+  background: #ffebee;
+  border-color: var(--danger);
+  color: var(--danger);
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   10. VERLAUF: FOOTER-BUTTONS (Kopieren, CSV, PDF, Leeren)
+   ========================================================================== */
+.verlauf-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.verlauf-footer button {
+  flex: 1 1 0;
+  min-width: 96px;
+  height: var(--btn-size);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15.2px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Kopieren */
+.btn-copy {
+  background: linear-gradient(90deg, #51a2d4, #3787b8);
+}
+.btn-copy:hover {
+  background: linear-gradient(90deg, #3787b8, #2b6a94);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(51, 135, 184, 0.4);
+}
+
+/* CSV Export */
+.btn-csv {
+  background: linear-gradient(90deg, #6b8e23, #7fbf3f);
+}
+.btn-csv:hover {
+  background: linear-gradient(90deg, #5a7a1e, #6ba030);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(107, 142, 35, 0.4);
+}
+
+/* PDF Export */
+.btn-pdf {
+  background: linear-gradient(90deg, #e94843, #ed7f7b);
+}
+.btn-pdf:hover {
+  background: linear-gradient(90deg, #d32f2f, #e94843);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(233, 72, 67, 0.4);
+}
+
+/* Verlauf leeren */
+.btn-delete {
+  background: linear-gradient(90deg, #cc1414, #ab077f);
+}
+.btn-delete:hover {
+  background: linear-gradient(90deg, #ab077f, #8b0663);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(204, 20, 20, 0.4);
+}
+
+/* Bestaetigungs-Zustand ("Wirklich loeschen?") */
+.btn-delete-confirm {
+  background-color: #ff3333 !important;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+/* ==========================================================================
+   11. RESPONSIVE: SMARTPHONE (max 600px)
+   ========================================================================== */
+@media (max-width: 600px) {
+  #mwst-rechner {
+    width: 100%;
+    margin: 8px 0;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  /* Inputs auf volle Breite */
+  .group,
+  .group.floating-label-group {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .group input[type="number"],
+  .group select {
+    max-width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+  }
+
+  .language-buttons { gap: 8px; }
+
+  .lang-btn {
+    min-width: 48px;
+    height: 38px;
+    padding: 6px 10px;
+  }
+
+  .floating-label { font-size: 16px; }
+
+  button.primary {
+    max-width: 100%;
+    padding: 12px 14px;
+    font-size: 15.2px;
+  }
+
+  .ergebnis-box,
+  .verlauf-container {
+    max-width: 100%;
+    margin: 12px 0;
+    padding: 16px;
+  }
+
+  .ergebnis-box h3 { font-size: 17.6px; }
+
+  .ergebnis-row {
+    padding: 4px 0;
+    font-size: 16px;
+  }
+
+  .verlauf-item { padding: 10px; }
+
+  .verlauf-values { font-size: 14.4px; }
+
+  .verlauf-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .verlauf-footer button {
+    flex: 1 1 100%;
+    height: 52px;
+    padding: 12px 16px;
+    font-size: 14.4px;
+  }
+
+  .verlauf-note-input {
+    min-height: 36px;
+    padding: 6px;
+    font-size: 13px;
+  }
+
+  .verlauf-delete {
+    min-width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+/* ==========================================================================
+   12. RESPONSIVE: KLEINSTE BILDSCHIRME (max 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  #mwst-rechner {
+    margin: 8px 0;
+    padding: 14px;
+    font-size: 15.2px;
+  }
+
+  .group,
+  .group.floating-label-group {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .group input[type="number"],
+  .group select,
+  button.primary {
+    max-width: 100%;
+  }
+
+  .floating-label-group input[type="number"],
+  .floating-label {
+    font-size: 15.2px;
+  }
+
+  .verlauf-title { font-size: 19.2px; }
+
+  .verlauf-bottom-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .verlauf-delete {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* ==========================================================================
+   13. RESPONSIVE: TABLET (601-900px)
+   ========================================================================== */
+@media (min-width: 601px) and (max-width: 900px) {
+  #mwst-rechner {
+    max-width: 540px;
+    padding: 20px;
+  }
+
+  .verlauf-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .verlauf-footer button { height: 52px; }
+}
