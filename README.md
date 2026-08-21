@@ -6,6 +6,20 @@ Professioneller Mehrwertsteuer-Rechner für WordPress – berechnet Netto ↔ Br
   <img src="preview.jpg" alt="Vorschau / Preview" width="340">
 </p>
 
+<p align="center">
+  <a href="../../releases/download/v1.2.7/mehrwertsteuer_rechner-1.2.7.zip">
+    <img src="https://img.shields.io/badge/⬇️%20Plugin%20herunterladen-Version%201.2.7-0c71c3?style=for-the-badge" alt="Plugin herunterladen v1.2.7">
+  </a>
+</p>
+
+> 📌 **So installierst du das Plugin:**
+> 1. Klicke auf den blauen Button oben um die ZIP herunterzuladen
+> 2. Gehe in WordPress zu **Plugins → Installieren → Plugin hochladen**
+> 3. Wähle die heruntergeladene ZIP-Datei aus und klicke auf **Jetzt installieren**
+> 4. Plugin **aktivieren** – fertig! ✅
+>
+> ⚠️ Bitte **nicht** den grünen „Code"-Button verwenden – der enthält den Quellcode für Entwickler, nicht das fertige Plugin!
+
 **Aktuelle Version:** 1.2.7 | **Getestet bis:** WordPress 7.1 | **Benötigt:** PHP 7.2+
 
 ## ✨ Funktionen
